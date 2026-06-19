@@ -23,6 +23,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    isBanned: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: String,
+      enum: ["active", "ofline"],
+      default: "ofline",
+    },
+    lastSeen: {
+      type: Date,
+    },
     role: {
       type: String,
       enum: ["user", "admin"],
