@@ -85,6 +85,8 @@ export const updateProfile = async (req, res, next) => {
         email: user.email,
         imageUrl: user.imageUrl,
         role: user.role,
+        isBanned: user.isBanned,
+        status: user.status,
       },
     });
   } catch (error) {

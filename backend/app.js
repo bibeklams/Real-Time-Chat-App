@@ -5,6 +5,7 @@ import errorMiddleware from "./middleware/errorMiddleware.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -15,6 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-
+app.use("/api/messages", messageRoutes);
 app.use(errorMiddleware);
 export default app;
