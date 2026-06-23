@@ -4,7 +4,10 @@ import { uploadToCloudinary } from "../utils/cloudinaryHandler.js";
 import cloudinary from "../config/cloudinaryConfig.js";
 export const getAllUser = async (req, res, next) => {
   try {
-    const users = await User.find().select("-password");
+    const users = await User.find({
+      _id: { $ne: req.user._id },
+      role: "user",
+    }).select("-password");
     if (users.length === 0) {
       throwError("No user found", 404);
     }

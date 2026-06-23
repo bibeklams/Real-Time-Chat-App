@@ -22,7 +22,7 @@ function LoginForm() {
 
       toast.success(data.message);
       resetForm();
-      navigate("/");
+      navigate("/chat");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
