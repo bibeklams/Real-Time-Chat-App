@@ -1,7 +1,21 @@
 import React from "react";
 import UserList from "./UserList";
-
-function Sidebar({ setSelectedUser }) {
+import { useDispatch } from "react-redux";
+import { logoutApi } from "../../services/authService";
+import { logout } from "../../redux/authSlice";
+import { useNavigate } from "react-router-dom";
+function Sidebar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    try {
+      await logoutApi();
+      dispatch(logout());
+      navigate("/login");
+    } catch (error) {
+      alert(error.response?.data?.message || "Something went wrong");
+    }
+  };
   return (
     <aside className="w-80 h-screen bg-white border-r flex flex-col">
       {/* Header */}
@@ -20,12 +34,15 @@ function Sidebar({ setSelectedUser }) {
 
       {/* User List */}
       <div className="flex-1 overflow-y-auto">
-        <UserList setSelectedUser={setSelectedUser} />
+        <UserList />
       </div>
 
       {/* Logout */}
       <div className="p-4 border-t">
-        <button className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+        <button
+          onClick={handleLogout}
+          className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+        >
           Logout
         </button>
       </div>

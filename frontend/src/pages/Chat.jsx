@@ -1,28 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+
 import MessageInput from "../components/chatComponents/MessageInput";
 import MessageList from "../components/chatComponents/MessageList";
 import Sidebar from "../components/chatComponents/Sidebar";
 import ChatHeader from "../components/chatComponents/ChatHeader";
 
 function Chat() {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const { selectedUser } = useSelector((state) => state.chat);
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <Sidebar setSelectedUser={setSelectedUser} />
+      <Sidebar />
 
       {/* Chat Area */}
       <div className="flex-1 flex flex-col">
         {selectedUser ? (
           <>
-            <ChatHeader selectedUser={selectedUser} />
+            <ChatHeader />
 
             <div className="flex-1 overflow-y-auto">
-              <MessageList selectedUser={selectedUser} />
+              <MessageList />
             </div>
 
-            <MessageInput selectedUser={selectedUser} />
+            <MessageInput />
           </>
         ) : (
           <div className="flex-1 flex items-center justify-center">
